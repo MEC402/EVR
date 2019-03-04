@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class BaseTrackManager : MonoBehaviour {
 
-	private AudioSource[] tracks;
+	public AudioClip[] tracks;
+	private AudioSource currentAudio;
 	// Use this for initialization
 	void Start () {
-		tracks = GetComponents<AudioSource>();
-		tracks[0].Play();
+		currentAudio = GetComponent<AudioSource>();
+		currentAudio.clip = tracks[0];
+		currentAudio.volume = .5f;
+		currentAudio.Play();
 	}
 	
 	// Update is called once per frame
