@@ -8,7 +8,7 @@ public class LocationTrackManager : MonoBehaviour {
     public Vector3 headsetRotation;
 	public AudioSource[] audioManager;
 
-    private int fadeRate = 5;
+    private int fadeRate = 7;
     private int fadeRateMultiplier = 2;
 
 
@@ -27,7 +27,7 @@ public class LocationTrackManager : MonoBehaviour {
         headsetRotation = headset.transform.rotation.eulerAngles;
 
         //Mosque
-        if (mosqueIsPlaying == false && (260f < headsetRotation.y && headsetRotation.y < 330f)){
+        if (mosqueIsPlaying == false && (250f < headsetRotation.y && headsetRotation.y < 330f)){
 			int random = Random.Range(0,2);
 			StopAllCoroutines();
 		    mosqueIsPlaying = true;
@@ -36,7 +36,7 @@ public class LocationTrackManager : MonoBehaviour {
 			fadeOut(audioManager[3]);
         }
 
-        if(mosqueIsPlaying == true && (headsetRotation.y < 260 || 330 < headsetRotation.y))
+        if(mosqueIsPlaying == true && (headsetRotation.y < 250f || 330f < headsetRotation.y))
         {
 			StopAllCoroutines();
 			fadeOut(audioManager[0]);
@@ -45,7 +45,7 @@ public class LocationTrackManager : MonoBehaviour {
         }
 		
         //People
-		if(peopleMoving == false && (180f < headsetRotation.y && headsetRotation.y < 220f))
+		if(peopleMoving == false && (140f < headsetRotation.y && headsetRotation.y < 220f))
         {
 			StopAllCoroutines();
           	peopleMoving = true;
@@ -54,7 +54,7 @@ public class LocationTrackManager : MonoBehaviour {
 			fadeOut(audioManager[1]);
 			fadeOut(audioManager[3]);
         }		
-        if (peopleMoving == true && (180 > headsetRotation.y || 230 < headsetRotation.y))
+        if (peopleMoving == true && (140f > headsetRotation.y || 230f < headsetRotation.y))
         {
 			StopAllCoroutines();
 			fadeOut(audioManager[2]);
