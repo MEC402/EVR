@@ -6,18 +6,19 @@ public class LocationTrackManager : MonoBehaviour {
 	public Camera headset;
 
     public Vector3 headsetRotation;
-	public AudioClip[] tracks = new AudioClip[3];
-	public AudioSource audio;
+	public AudioSource[] audioManager;
 
     private int fadeRate = 5;
     private int fadeRateMultiplier = 2;
 
-	private int randomTrack;
+
+    private int source;
 	private bool mosqueIsPlaying = false;
     private bool peopleMoving = false;
 
 	void Start () {
-	audio = GetComponent<AudioSource>();
+		audioManager = GetComponents<AudioSource>();
+		source = 2;
 	}
 	
 	// Update is called once per frame
@@ -27,17 +28,19 @@ public class LocationTrackManager : MonoBehaviour {
 
         //Mosque
         if (mosqueIsPlaying == false && (260f < headsetRotation.y && headsetRotation.y < 330f)){
+			int random = Random.Range(0,2);
 			StopAllCoroutines();
 		    mosqueIsPlaying = true;
-		    randomTrack = Random.Range(0,2);
-		    audio.clip = tracks[randomTrack];
-            fadeIn(audio);
+			fadeIn(audioManager[random]);
+			fadeOut(audioManager[2]);
+			fadeOut(audioManager[3]);
         }
 
         if(mosqueIsPlaying == true && (headsetRotation.y < 260 || 330 < headsetRotation.y))
         {
-        	StopAllCoroutines();
-			fadeOut(audio);
+			StopAllCoroutines();
+			fadeOut(audioManager[0]);
+			fadeOut(audioManager[1]);
 			mosqueIsPlaying = false;
         }
 		
@@ -46,13 +49,16 @@ public class LocationTrackManager : MonoBehaviour {
         {
 			StopAllCoroutines();
           	peopleMoving = true;
-			audio.clip = tracks[2];
-			fadeIn(audio);
+			fadeIn(audioManager[2]);
+			fadeOut(audioManager[0]);
+			fadeOut(audioManager[1]);
+			fadeOut(audioManager[3]);
         }		
         if (peopleMoving == true && (180 > headsetRotation.y || 230 < headsetRotation.y))
         {
 			StopAllCoroutines();
-			fadeOut(audio);
+			fadeOut(audioManager[2]);
+			fadeOut(audioManager[3]);
 			peopleMoving = false;
         }
     }
@@ -74,14 +80,26 @@ public class LocationTrackManager : MonoBehaviour {
 			audio.volume += Time.deltaTime / fadeRate;
 			yield return null;
 		}
-		yield return new WaitForSeconds(audio.clip.length);
-		if(audio.clip.Equals(tracks[0])){
-			audio.clip = tracks[1];
+		yield return new WaitForSeconds(audio.clip.length - audio.clip.length / 4);
+		if(audio.clip.Equals(audioManager[0].clip)){
+			fadeIn(audioManager[1]);
+			fadeOut(audioManager[0]);
 		}
-		else if(audio.clip.Equals(tracks[1])){
-			audio.clip = tracks[0];
+		else if(audio.clip.Equals(audioManager[1].clip)){
+			fadeIn(audioManager[0]);
+			fadeOut(audioManager[1]);
 		}
-		fadeIn(audio);
+		else if(audio.clip.Equals(audioManager[2].clip) && source == 2){
+			source++;
+			fadeIn(audioManager[3]);
+			fadeOut(audioManager[2]);
+		}
+		else{
+			source--;
+			fadeIn(audioManager[2]);
+			fadeOut(audioManager[3]);
+		}
+
 	}
 
 	private IEnumerator fadeTrackOut(AudioSource audio){
