@@ -10,6 +10,9 @@ public class LocationTrackManager : MonoBehaviour {
 	public AudioSource audio;
 
     private int fadeRate = 5;
+    private int fadeRateMultiplier = 2;
+
+	private int randomTrack;
 	private bool mosqueIsPlaying = false;
     private bool peopleMoving = false;
 
@@ -21,12 +24,13 @@ public class LocationTrackManager : MonoBehaviour {
 	void Update () {
 
         headsetRotation = headset.transform.rotation.eulerAngles;
-		
+
         //Mosque
         if (mosqueIsPlaying == false && (260f < headsetRotation.y && headsetRotation.y < 330f)){
 			StopAllCoroutines();
 		    mosqueIsPlaying = true;
-		    audio.clip = tracks[0];
+		    randomTrack = Random.Range(0,2);
+		    audio.clip = tracks[randomTrack];
             fadeIn(audio);
         }
 
@@ -61,7 +65,6 @@ public class LocationTrackManager : MonoBehaviour {
     {
         StartCoroutine(fadeTrackOut(audio));
     }
-
     private IEnumerator fadeTrackIn (AudioSource audio)
 	{
 		audio.volume = 0f;
@@ -71,14 +74,20 @@ public class LocationTrackManager : MonoBehaviour {
 			audio.volume += Time.deltaTime / fadeRate;
 			yield return null;
 		}
-
+		yield return new WaitForSeconds(audio.clip.length);
+		if(audio.clip.Equals(tracks[0])){
+			audio.clip = tracks[1];
+		}
+		else if(audio.clip.Equals(tracks[1])){
+			audio.clip = tracks[0];
+		}
+		fadeIn(audio);
 	}
 
 	private IEnumerator fadeTrackOut(AudioSource audio){
 		while(audio.volume > 0){
-			audio.volume -= Time.deltaTime / fadeRate *2;
+			audio.volume -= Time.deltaTime / fadeRate * fadeRateMultiplier;
 			yield return null;
 		}    	
 	}
-
 }
