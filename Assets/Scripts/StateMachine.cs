@@ -75,7 +75,7 @@ public class StateMachine : MonoBehaviour {
 		this.current_state = rest_68;
 	}
 
-	private class State{
+	public class State{
 
 		State_names name;
 		Dictionary<Event_names, State> transitions = new Dictionary<Event_names, State>();
@@ -91,5 +91,17 @@ public class StateMachine : MonoBehaviour {
 		public State process_event(Event_names e){
 			return transitions[e];
 		}
+
+		public State_names getName(){
+			return this.name;
+		}
+	}
+
+	public void process_event(Event_names e){
+		this.current_state = current_state.process_event(e);
+	}
+
+	public State getCurrentState(){
+		return this.current_state;
 	}
 }
