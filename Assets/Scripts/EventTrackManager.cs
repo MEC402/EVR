@@ -8,12 +8,13 @@ public class EventTrackManager : MonoBehaviour {
 
 	public Vector3 headsetRotation;
 	private float rotation_speed;
-	private float current_headset_rotation;
+	private Vector3 current_headset_rotation;
+	private float fast_rotation = 2.0f;
 
 	public AudioSource[] audioManager;
 	private int source;
 
-	private StateMachine msm;
+	public StateMachine msm;
 
 	private int rest_68 = 0;
 	private int rest_72 = 1;
@@ -23,55 +24,79 @@ public class EventTrackManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		Debug.Log("hola");
 		audioManager = GetComponents<AudioSource>();
-		source = 0;
+		source = rest_68;
 
 		headsetRotation = headset.transform.rotation.eulerAngles;
 		current_headset_rotation = headset.transform.rotation.eulerAngles;
 		rotation_speed = 0.0f;
 
 		msm = new StateMachine();
+		Debug.Log(msm);
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		if (Input.GetKey(KeyCode.A)){
+			rotation_speed = 0.0f;
+		}
+		else if (Input.GetKey(KeyCode.S)){
+			rotation_speed = 1.0f;
+		}
+		else if (Input.GetKey(KeyCode.D)){
+			rotation_speed = 2.0f;
+		}
+
 		if (!audioManager[source].isPlaying){
 		 	current_headset_rotation = headset.transform.rotation.eulerAngles;
-			rotation_speed = Mathf.Sqrt((headsetRotation.x-current_headset_rotation.x)*(headsetRotation.x-current_headset_rotation.x) +
-										(headsetRotation.y-current_headset_rotation.y)*(headsetRotation.y-current_headset_rotation.y));
+			//rotation_speed = Mathf.Sqrt((headsetRotation.x-current_headset_rotation.x)*(headsetRotation.x-current_headset_rotation.x) +
+//										(headsetRotation.y-current_headset_rotation.y)*(headsetRotation.y-current_headset_rotation.y));
+
+			
+
+
 
 			// Trigger the event
-			if (rotation_speed == 0) {
+			if (rotation_speed == 0.0f) {
 				msm.process_event(StateMachine.Event_names.Rest);
 			}
-			else if (rotation_speed > 0 && rotation_speed < fast_rotation) {
+			else if (rotation_speed > 0.0f && rotation_speed < fast_rotation) {
 				msm.process_event(StateMachine.Event_names.Slow_pan);
 			}
-			else {
+			else if (rotation_speed >= fast_rotation) {
 				msm.process_event(StateMachine.Event_names.Fast_pan);
 			}
 
 			// Play correct track
 			StateMachine.State current_state = msm.getCurrentState();
+			stop_tracks();
 
 			switch(current_state.getName()){
 				case StateMachine.State_names.Rest_68:
-					audioManager[rest_68].Play();
+					source = rest_68;
 					break;
 				case StateMachine.State_names.Rest_72:
-					audioManager[rest_72].Play();
+					source = rest_72;
 					break;
 				case StateMachine.State_names.Slow_72:
-					audioManager[slow_72].Play();
+					source = slow_72;
 					break;
 				case StateMachine.State_names.Fast_72:
-					audioManager[fast_72].Play();
+					source = fast_76;
 					break;
 				case StateMachine.State_names.Fast_76:
-					audioManager[fast_76].Play();
+					source = fast_76;
 					break;
 			}
+			audioManager[source].Play();
 		}
 		
+	}
+
+	void stop_tracks(){
+		foreach ( AudioSource track in audioManager){
+			track.Stop();
+		}
 	}
 }

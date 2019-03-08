@@ -618,7 +618,7 @@ AudioSource:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 516796471}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
@@ -855,6 +855,7 @@ GameObject:
   - component: {fileID: 692885289}
   - component: {fileID: 692885288}
   - component: {fileID: 692885287}
+  - component: {fileID: 692885292}
   m_Layer: 0
   m_Name: Event_Audio
   m_TagString: Untagged
@@ -1275,6 +1276,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &692885292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 692885285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f830c771cbe8f24c90afd37e50d8aad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  headset: {fileID: 1578270927}
+  headsetRotation: {x: 0, y: 0, z: 0}
+  audioManager: []
 --- !u!1 &1101311664
 GameObject:
   m_ObjectHideFlags: 0

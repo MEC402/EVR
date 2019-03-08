@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StateMachine : MonoBehaviour {
+public class StateMachine{
 
 	public enum Event_names {
 		Rest,
@@ -24,17 +24,15 @@ public class StateMachine : MonoBehaviour {
 
 
 
-	// Use this for initialization
-	void Start () {
+
+	public StateMachine () {
 		build_state_machine();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
 
 	void build_state_machine(){
+		this.states = new List<State>();
+
 		State rest_68 = new State(State_names.Rest_68);
 		State rest_72 = new State(State_names.Rest_72);
 		State slow_72 = new State(State_names.Slow_72);
@@ -98,6 +96,7 @@ public class StateMachine : MonoBehaviour {
 	}
 
 	public void process_event(Event_names e){
+		Debug.Log(current_state.getName() + ": " + e.ToString());
 		this.current_state = current_state.process_event(e);
 	}
 
