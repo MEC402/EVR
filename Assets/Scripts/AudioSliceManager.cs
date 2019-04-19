@@ -18,9 +18,9 @@ public class AudioSliceManager : MonoBehaviour {
 	private float currentLocation;
 
 	//manages what track is played from which array.
-	public int restTrack;
-	public int fastTrack;
-	public int slowTrack;
+	private int restTrack;
+	private int fastTrack;
+	private int slowTrack;
 
 	// Use this for initialization
 	void Start () {
@@ -84,11 +84,11 @@ public class AudioSliceManager : MonoBehaviour {
 
 		while (audio.isPlaying) {
 			if (trackSource == 0) {
-				if (locationDifference < 3) {
+				if (locationDifference < 2) {
 					audioTracks [1].clip = restSlices [restTrack];
 
 				}
-				if (locationDifference >= 3 && locationDifference < 7 ) {
+				if (locationDifference >= 2 && locationDifference < 7 ) {
 					audioTracks [1].clip = slowSlices [slowTrack];
 
 				}
@@ -98,11 +98,11 @@ public class AudioSliceManager : MonoBehaviour {
 				}
 			}
 			else {
-				if (locationDifference < 3) {
+				if (locationDifference < 2) {
 					audioTracks [0].clip = restSlices [restTrack];
 
 				}
-				if (locationDifference >= 3 && locationDifference < 7) {
+				if (locationDifference >= 2 && locationDifference < 7) {
 					audioTracks [0].clip = slowSlices [slowTrack];
 
 				}

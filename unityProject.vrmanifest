@@ -5,7 +5,7 @@
       "app_key": "application.generated.unity.evr.exe",
       "launch_type": "url",
       "url": "steam://launch/",
-      "action_manifest_path": "E:\\GitHub\\EVR\\actions.json",
+      "action_manifest_path": "E:\\Kenny\\actions.json",
       "strings": {
         "en_us": {
           "name": "EVR [Testing]"
