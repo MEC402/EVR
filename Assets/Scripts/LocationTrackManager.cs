@@ -8,7 +8,7 @@ public class LocationTrackManager : MonoBehaviour {
     public Vector3 headsetRotation;
 	public AudioSource[] audioManager;
 
-    private int fadeRate = 7;
+    private int fadeRate = 18;
     private int fadeRateMultiplier = 2;
 
 
@@ -75,7 +75,7 @@ public class LocationTrackManager : MonoBehaviour {
 	{
 		audio.volume = 0f;
         audio.Play ();
-		while(audio.volume < 1){
+		while(audio.volume < .25){
 
 			audio.volume += Time.deltaTime / fadeRate;
 			yield return null;

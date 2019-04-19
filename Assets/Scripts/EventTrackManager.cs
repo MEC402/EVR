@@ -7,7 +7,7 @@ public class EventTrackManager : MonoBehaviour {
 	public Camera headset;
 
 	public Vector3 headsetRotation;
-	private float rotation_speed;
+	public float rotation_speed;
 	private Vector3 current_headset_rotation;
 	private float fast_rotation = 2.0f;
 
