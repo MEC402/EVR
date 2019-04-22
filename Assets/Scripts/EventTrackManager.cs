@@ -24,7 +24,6 @@ public class EventTrackManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Debug.Log("hola");
 		audioManager = GetComponents<AudioSource>();
 		source = rest_68;
 
@@ -33,7 +32,7 @@ public class EventTrackManager : MonoBehaviour {
 		rotation_speed = 0.0f;
 
 		msm = new StateMachine();
-		Debug.Log(msm);
+		//Debug.Log(msm);
 	}
 	
 	// Update is called once per frame
