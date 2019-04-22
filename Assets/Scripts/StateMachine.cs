@@ -29,8 +29,15 @@ public class StateMachine{
 		build_state_machine();
 	}
 
+	public StateMachine (List<State> states, State initial) {
+		this.current_state = initial;
+		this.states = states;
+	}
+
+
 
 	void build_state_machine(){
+	/*
 		this.states = new List<State>();
 
 		State rest_68 = new State(State_names.Rest_68);
@@ -71,31 +78,32 @@ public class StateMachine{
 
 		// Set initial state
 		this.current_state = rest_68;
+		*/
 	}
 
 	public class State{
 
-		State_names name;
-		Dictionary<Event_names, State> transitions = new Dictionary<Event_names, State>();
+		string name;
+		Dictionary<string, State> transitions = new Dictionary<string, State>();
 
-		public State(State_names name){
+		public State(string name){
 			this.name = name;
 		}
 
-		public void addTransition(Event_names e, State s){
+		public void addTransition(string e, State s){
 			this.transitions.Add(e,s);
 		}
 
-		public State process_event(Event_names e){
+		public State process_event(string e){
 			return transitions[e];
 		}
 
-		public State_names getName(){
+		public string getName(){
 			return this.name;
 		}
 	}
 
-	public void process_event(Event_names e){
+	public void process_event(string e){
 		Debug.Log(current_state.getName() + ": " + e.ToString());
 		this.current_state = current_state.process_event(e);
 	}

@@ -58,13 +58,13 @@ public class EventTrackManager : MonoBehaviour {
 
 			// Trigger the event
 			if (rotation_speed == 0.0f) {
-				msm.process_event(StateMachine.Event_names.Rest);
+				msm.process_event("Rest");
 			}
 			else if (rotation_speed > 0.0f && rotation_speed < fast_rotation) {
-				msm.process_event(StateMachine.Event_names.Slow_pan);
+				msm.process_event("Slow_pan");
 			}
 			else if (rotation_speed >= fast_rotation) {
-				msm.process_event(StateMachine.Event_names.Fast_pan);
+				msm.process_event("Fast_pan");
 			}
 
 			// Play correct track
@@ -72,21 +72,21 @@ public class EventTrackManager : MonoBehaviour {
 			stop_tracks();
 
 			switch(current_state.getName()){
-				case StateMachine.State_names.Rest_68:
+				case "Rest_68":
 					source = rest_68;
 					break;
-				case StateMachine.State_names.Rest_72:
-					source = rest_72;
-					break;
-				case StateMachine.State_names.Slow_72:
-					source = slow_72;
-					break;
-				case StateMachine.State_names.Fast_72:
-					source = fast_76;
-					break;
-				case StateMachine.State_names.Fast_76:
-					source = fast_76;
-					break;
+				case "Rest_72":
+						source = rest_72;
+						break;
+				case "Slow_72":
+						source = slow_72;
+						break;
+				case "Fast_76":
+						source = fast_76;
+						break;
+				case "Fast_78":
+						source = fast_76;
+						break;
 			}
 			audioManager[source].Play();
 		}
