@@ -15,6 +15,7 @@ public class AutomataReader{
 		this.initial = null;
 		this.states = new List<StateMachine.State>();
 		this.lines = System.IO.File.ReadAllLines(filename);
+		build_state_machine();
 	}
 
 	private void build_state_machine(){
@@ -30,18 +31,19 @@ public class AutomataReader{
 		}
 		i++;
 
-		while (lines[i].Equals("INITIAL")){
+		while (!lines[i].Equals("INITIAL")){
 			this.states.Add(new StateMachine.State(lines[i]));
 			i++;
 		}
 		i++;
 
 		this.initial = find_state(lines[i]);
-		i++;
+		i++; i++;
 
 
 		while (!lines[i].Equals("END")){
 			string [] transition = lines[i].Split(',');
+			Debug.Log(lines[i]);
 			StateMachine.State src = find_state(transition[0]);
 			StateMachine.State dst = find_state(transition[2]);
 
@@ -57,7 +59,7 @@ public class AutomataReader{
 
 	public StateMachine getStateMachine(){
 		if (sm == null){
-			// print error
+			Debug.Log("Error returning state machine, sm == null");
 			return null;
 		}
 		return this.sm;

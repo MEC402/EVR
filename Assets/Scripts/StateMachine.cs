@@ -104,8 +104,9 @@ public class StateMachine{
 	}
 
 	public void process_event(string e){
-		Debug.Log(current_state.getName() + ": " + e.ToString());
+		string prev = current_state.getName();
 		this.current_state = current_state.process_event(e);
+		Debug.Log(prev + " --" + e.ToString() + "--> " + current_state.getName());
 	}
 
 	public State getCurrentState(){
