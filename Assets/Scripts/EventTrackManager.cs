@@ -11,8 +11,10 @@ public class EventTrackManager : MonoBehaviour {
 	private Queue<float> rotation_speed_queue;
 	private int max_queue_size = 50;
 	private Vector3 prev_headset_rotation;
-	private float slow_rotation = 0.4f;
-	private float fast_rotation = 1.1f;
+	[Range(0.0f, 1.5f)]
+	public float slow_rotation = 0.1f;
+	[Range(0.0f, 1.5f)]
+	public float fast_rotation = 0.4f;
 
 	private AudioSource[] audioManager;
 	private AudioSource current_source;
@@ -40,7 +42,8 @@ public class EventTrackManager : MonoBehaviour {
 
 	private bool alternate = false;
 
-	private float track_overlap =  0.015f;
+	[Range(0.0f, 0.2f)]
+	public float track_overlap =  0.015f;
 	private int fadeRate = 5;
     private int fadeRateMultiplier = 2;
 
@@ -49,6 +52,9 @@ public class EventTrackManager : MonoBehaviour {
 	void Start () {
 		Debug.Log("Start");
 		audioManager = GetComponents<AudioSource>();
+		for(int i = 0; i < audioManager.Length; i++){
+			audioManager[i].volume = .1f;
+		}
 		source = r0;
 		this.current_source = audioManager[source];
 		this.current_source.Play();
@@ -100,6 +106,7 @@ public class EventTrackManager : MonoBehaviour {
 		//if (current_source.time / current_source.clip.length > 0.98){
 		if (this.current_source.time > this.current_source.clip.length - this.track_overlap){ 
 			// Trigger the event
+
 			if (rotation_speed <= slow_rotation) {
 				Debug.Log("rest");
 				msm.process_event("rest");
@@ -112,6 +119,7 @@ public class EventTrackManager : MonoBehaviour {
 				Debug.Log("fast");
 				msm.process_event("pan_f");
 			}
+
 
 
 			// Play correct track
