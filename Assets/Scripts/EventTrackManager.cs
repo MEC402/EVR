@@ -23,24 +23,42 @@ public class EventTrackManager : MonoBehaviour {
 	public StateMachine msm;
 
 	// Audio source for rest states
-	private int r0 = 0;
-	private int r1 = 1;
-	private int r2 = 2;
+	private int r1a = 0;
+	private int r1b = 1;
+	private int r1c = 2;
+	private int r2a = 3;
+	private int r2b = 4;
+	private int r2c = 5;
+	private int r2d = 6;
+	private int r2e = 7;
+
 
 	// Audio source for slow states
-	private int s0 = 3;
-	private int s1 = 4;
-	private int s2 = 5;
-	private int s3 = 6;
+	private int s1a = 8;
+	private int s1b = 9;
+	private int s2a = 10;
+	private int s2b = 11;
+	private int s3a = 12;
+	private int s3b = 13;
 
 	// Audio source for fast states
-	private int f0 = 7;
-	private int f1 = 8;
-	private int f2 = 9;
-	private int f3 = 10;
-	private int f3a = 11;
+	private int f1a = 14;
+	private int f1b = 15;
+	private int f1c = 16;
+	private int f1d = 17;
+	private int f1e = 18;
+	private int f1f = 19;
+	private int f1g = 20;
+	private int f1h = 21;
+	private int f2a = 22;
+	private int f2b = 23;
+	private int f2c = 24;
+	private int f2d = 25;
+	private int f2e = 26;
+	private int f2f = 27;
+	private int f2g = 28;
+	private int f2h = 29;
 
-	private bool alternate = false;
 
 	[Range(0.0f, 0.2f)]
 	public float track_overlap =  0.015f;
@@ -127,43 +145,104 @@ public class EventTrackManager : MonoBehaviour {
 			//stop_tracks();
 
 			switch(current_state.getName()){
-				case "R0":
-						source = r0;
+				case "R1A":
+						source = r1a;
 						break;
-				case "R1":
-						source = r1;
+				case "R1B":
+						source = r1b;
 						break;
-				case "R2":
-						source = r2;
+				case "R1C":
+						source = r1c;
 						break;
-				case "S0":
-						source = s0;
+				case "R2A":
+						source = r2a;
 						break;
-				case "S1":
-						source = s1;
+				case "R2B":
+						source = r2b;
 						break;
-				case "S2":
-						source = s2;
+				case "R2C":
+						source = r2c;
 						break;
-				case "S3":
-						source = s3;
+				case "R2D":
+						source = r2d;
 						break;
-				case "F0":
-						source = f0;
+				case "R2E":
+						source = r2e;
 						break;
-				case "F1":
-						source = f1;
+
+
+				case "S1A":
+						source = s1a;
 						break;
-				case "F2":
-						source = f2;
+				case "S1B":
+						source = s1b;
 						break;
-				case "F3":
-						if (alternate)
-							source = f3a;
-						else
-							source = f3;
-						alternate = !alternate;
+				case "S2A":
+						source = s2a;
 						break;
+				case "S2B":
+						source = s2b;
+						break;
+				case "S3A":
+						source = s3a;
+						break;
+				case "S3B":
+						source = s3b;
+						break;
+
+
+				case "F1A":
+						source = f1a;
+						break;
+				case "F1B":
+						source = f1b;
+						break;
+				case "F1C":
+						source = f1c;
+						break;
+				case "F1D":
+						source = f1d;
+						break;
+				case "F1E":
+						source = f1e;
+						break;
+				case "F1F":
+						source = f1f;
+						break;
+				case "F1G":
+						source = f1g;
+						break;
+				case "F1H":
+						source = f1h;
+						break;
+
+				case "F2A":
+						source = f2a;
+						break;
+				case "F2B":
+						source = f2b;
+						break;
+				case "F2C":
+						source = f2c;
+						break;
+				case "F2D":
+						source = f2d;
+						break;
+				case "F2E":
+						source = f2e;
+						break;
+				case "F2F":
+						source = f2f;
+						break;
+				case "F2G":
+						source = f2g;
+						break;
+				case "F2H":
+						source = f2h;
+						break;
+
+
+				
 			}
 			stop_tracks();
 			//fadeOut(this.current_source);
