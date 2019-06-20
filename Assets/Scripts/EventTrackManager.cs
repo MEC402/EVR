@@ -40,24 +40,25 @@ public class EventTrackManager : MonoBehaviour {
 	private int s2b = 11;
 	private int s3a = 12;
 	private int s3b = 13;
+	private int s3c = 14;
 
 	// Audio source for fast states
-	private int f1a = 14;
-	private int f1b = 15;
-	private int f1c = 16;
-	private int f1d = 17;
-	private int f1e = 18;
-	private int f1f = 19;
-	private int f1g = 20;
-	private int f1h = 21;
-	private int f2a = 22;
-	private int f2b = 23;
-	private int f2c = 24;
-	private int f2d = 25;
-	private int f2e = 26;
-	private int f2f = 27;
-	private int f2g = 28;
-	private int f2h = 29;
+	private int f1a = 15;
+	private int f1b = 16;
+	private int f1c = 17;
+	private int f1d = 18;
+	private int f1e = 19;
+	private int f1f = 20;
+	private int f1g = 21;
+	private int f1h = 22;
+	private int f2a = 23;
+	private int f2b = 24;
+	private int f2c = 25;
+	private int f2d = 26;
+	private int f2e = 27;
+	private int f2f = 28;
+	private int f2g = 29;
+	private int f2h = 30;
 
 
 	[Range(0.0f, 0.2f)]
@@ -73,7 +74,7 @@ public class EventTrackManager : MonoBehaviour {
 		for(int i = 0; i < audioManager.Length; i++){
 			audioManager[i].volume = .1f;
 		}
-		source = r0;
+		source = r1a;
 		this.current_source = audioManager[source];
 		this.current_source.Play();
 
@@ -188,6 +189,9 @@ public class EventTrackManager : MonoBehaviour {
 						break;
 				case "S3B":
 						source = s3b;
+						break;
+				case "S3C":
+						source = s3c;
 						break;
 
 
